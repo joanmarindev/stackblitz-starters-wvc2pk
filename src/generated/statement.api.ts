@@ -4,7 +4,6 @@
  */
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
-import { delay } from 'rxjs/operators';
 
 export interface Statement {
   id: string;
@@ -70,9 +69,16 @@ const quickSearch = (search?: string) => {
       return true;
     }
     return Object.keys(item).some((key) => {
-      return item[key].toString()
-      .toLowerCase()
-      .includes(search);
+      const value = item[key];
+      if (typeof value === 'object') {
+        // If it's an object, search recursively inside the object
+        return Object.keys(value).some(subKey => {
+          return value[subKey].toString().toLowerCase().includes(search);
+        });
+      } else {
+        // Otherwise, do the search straigh
+        return value.toString().toLowerCase().includes(search);
+      }
     });
   };
 };
