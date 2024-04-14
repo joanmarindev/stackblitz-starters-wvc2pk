@@ -13,7 +13,7 @@ export class UsersService {
   constructor(private usersApi: UsersApi) {}
 
   getFilteredStatements(searchInput: string): Observable<Statement[]> {
-    const request: GetStatementsRequest = { search: searchInput };
-    return this.usersApi.getUsers(request).pipe(delay(600));
+    const request: GetStatementsRequest = { search: searchInput.toLowerCase() };
+    return this.usersApi.getUsers(request).pipe();
   }
 }

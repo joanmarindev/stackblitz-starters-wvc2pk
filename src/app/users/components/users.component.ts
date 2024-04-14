@@ -27,9 +27,9 @@ import { UsersService } from '../users.service';
         <tbody *ngIf="filteredStatements.length > 0">
           <tr *ngFor="let statement of filteredStatements">
             <td>{{ statement?.account }}</td>
-            <td>{{ statement?.dueDate }}</td>
-            <td>{{ statement?.amount }}</td>
-            <td>{{ statement?.period?.from }} - {{ statement?.period?.to }}</td>
+            <td>{{ statement?.dueDate | date:'dd/MM/yyyy' }}</td>
+            <td>{{ statement?.amount | currency:'USD'}}</td>
+            <td>{{ statement?.period?.from | date:'dd/MM/yyyy' }} - {{ statement?.period?.to | date:'dd/MM/yyyy' }}</td>
           </tr>
         </tbody>
       </table>
@@ -55,6 +55,5 @@ export class UsersComponent {
       .subscribe((statements) => {
         this.filteredStatements = statements;
       });
-    console.log(this.filteredStatements);
   }
 }
