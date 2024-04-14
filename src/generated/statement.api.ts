@@ -70,7 +70,9 @@ const quickSearch = (search?: string) => {
       return true;
     }
     return Object.keys(item).some((key) => {
-      return JSON.stringify(item[key]).startsWith(search);
+      return item[key].toString()
+      .toLowerCase()
+      .includes(search);
     });
   };
 };
@@ -80,6 +82,6 @@ const quickSearch = (search?: string) => {
 })
 export class UsersApi {
   getUsers(request: GetStatementsRequest) {
-    return of(statements.filter(quickSearch(request.search))).pipe(delay(600));
+    return of(statements.filter(quickSearch(request.search))).pipe();
   }
 }
