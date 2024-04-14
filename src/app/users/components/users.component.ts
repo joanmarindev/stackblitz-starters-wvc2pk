@@ -6,35 +6,8 @@ import { UsersService } from '../users.service';
 @Component({
   selector: 'app-users',
   imports: [CommonModule],
-  template: `
-    <div>
-      <h2>Statements</h2>
-      <!-- filters -->
-      <input placeholder="Quick search" (input)="onSearchInputChange($event)" />
-      <!-- render some data here -->
-      <table>
-        <caption>
-          Statement Summary
-        </caption>
-        <thead>
-          <tr>
-            <th scope="col">Account</th>
-            <th scope="col">Due Date</th>
-            <th scope="col">Amount</th>
-            <th scope="col">Period</th>
-          </tr>
-        </thead>
-        <tbody *ngIf="filteredStatements.length > 0">
-          <tr *ngFor="let statement of filteredStatements">
-            <td>{{ statement?.account }}</td>
-            <td>{{ statement?.dueDate | date:'dd/MM/yyyy' }}</td>
-            <td>{{ statement?.amount | currency:'USD'}}</td>
-            <td>{{ statement?.period?.from | date:'dd/MM/yyyy' }} - {{ statement?.period?.to | date:'dd/MM/yyyy' }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>`,
-  standalone: true,
+  templateUrl: './users.component.html',
+  standalone: true
 })
 export class UsersComponent {
   filteredStatements: Statement[] = [];
